@@ -9,129 +9,137 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          leading: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset("${AssetsManager.imagePath}/logo.png"),
-          ),
-          title: const Text("FizioCare - Profil"),
+      appBar: AppBar(
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Image.asset("${AssetsManager.imagePath}/logo.png"),
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Visibility(
-                visible: false,
-                child: Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: TitlesTextWidget(
-                      label: "Prijavite se za pristup svim funkcijama"),
+        title: const Text("FizioCare - Profil"),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Visibility(
+              visible: false,
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: TitlesTextWidget(
+                  label: "Prijavite se za pristup svim funkcijama",
                 ),
               ),
-              Visibility(
-                visible: true,
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 60,
-                        height: 60,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Theme.of(context).cardColor,
-                          border: Border.all(
-                              color: Theme.of(context).colorScheme.surface,
-                              width: 3),
-                          image: const DecorationImage(
-                              image: NetworkImage(
-                                  "https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_1280.png"),
-                              fit: BoxFit.cover),
+            ),
+            Visibility(
+              visible: true,
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 60,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Theme.of(context).cardColor,
+                        border: Border.all(
+                          color: Theme.of(context).colorScheme.surface,
+                          width: 3,
+                        ),
+                        image: DecorationImage(
+                          image: AssetImage(
+                            "${AssetsManager.imagePath}/avatar.png",
+                          ),
+                          fit: BoxFit.cover,
                         ),
                       ),
-                      const SizedBox(width: 10),
-                      const Column(
+                    ),
+                    const SizedBox(width: 10),
+                    const Expanded(
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          TitlesTextWidget(label: "Ivana Grk"), // Prilagođeno tebi!
+                          TitlesTextWidget(label: "Ivana Grk"),
                           SizedBox(height: 6),
-                          SubtitleTextWidget(label: "ivana.fiziocare@gmail.com")
+                          SubtitleTextWidget(label: "ivana.fiziocare@gmail.com"),
                         ],
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(height: 15),
-              Padding(
-                padding: const EdgeInsets.all(14.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Divider(),
-                    const SizedBox(height: 5),
-                    const TitlesTextWidget(label: "Opšte"),
-                    const SizedBox(height: 10),
-                    CustomListTile(
-                        imagePath:
-                            "${AssetsManager.imagePath}/bag/checkout.png",
-                        text: "Moji termini", // Prilagođeno umjesto narudžbina
-                        function: () {}),
-                    CustomListTile(
-                        imagePath:
-                            "${AssetsManager.imagePath}/bag/wishlist.png",
-                        text: "Omiljene vježbe", // Prilagođeno umjesto wishlist-e
-                        function: () {}),
-                    CustomListTile(
-                        imagePath:
-                            "${AssetsManager.imagePath}/profile/repeat.png",
-                        text: "Istorija terapija",
-                        function: () {}),
-                    CustomListTile(
-                      imagePath: "${AssetsManager.imagePath}/address.png",
-                      text: "Adresa ordinacije",
-                      function: () {},
+                      ),
                     ),
-                    const SizedBox(height: 10),
-                    const Divider(
-                      thickness: 2,
-                    ),
-                    const TitlesTextWidget(label: "Podešavanja"),
-                    const SizedBox(height: 10),
                   ],
                 ),
               ),
-              Center(
-                child: ElevatedButton.icon(
-                  onPressed: () {},
-                  icon: const Icon(Icons.login),
-                  label: const Text("Odjava"),
-                ),
-              )
-            ],
-          ),
-        ));
+            ),
+            const SizedBox(height: 15),
+            Padding(
+              padding: const EdgeInsets.all(14.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Divider(),
+                  const SizedBox(height: 5),
+                  const TitlesTextWidget(label: "Opšte"),
+                  const SizedBox(height: 10),
+                  CustomListTile(
+                    icon: Icons.calendar_month_outlined,
+                    text: "Moji termini",
+                    function: () {},
+                  ),
+                  CustomListTile(
+                    icon: Icons.favorite_border,
+                    text: "Omiljene vježbe",
+                    function: () {},
+                  ),
+                  CustomListTile(
+                    icon: Icons.history,
+                    text: "Istorija terapija",
+                    function: () {},
+                  ),
+                  CustomListTile(
+                    icon: Icons.location_on_outlined,
+                    text: "Adresa ordinacije",
+                    function: () {},
+                  ),
+                  const SizedBox(height: 10),
+                  const Divider(
+                    thickness: 2,
+                  ),
+                  const TitlesTextWidget(label: "Podešavanja"),
+                  const SizedBox(height: 10),
+                ],
+              ),
+            ),
+            Center(
+              child: ElevatedButton.icon(
+                onPressed: () {},
+                icon: const Icon(Icons.login),
+                label: const Text("Odjava"),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 
 class CustomListTile extends StatelessWidget {
-  const CustomListTile(
-      {super.key,
-      required this.imagePath,
-      required this.text,
-      required this.function});
-  final String imagePath, text;
-  final Function function;
+  const CustomListTile({
+    super.key,
+    required this.icon,
+    required this.text,
+    required this.function,
+  });
+
+  final IconData icon;
+  final String text;
+  final VoidCallback function;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: () {
-        function();
-      },
+      onTap: function,
+      leading: Icon(icon, size: 28),
       title: SubtitleTextWidget(label: text),
-      leading: Image.asset(imagePath, height: 34),
       trailing: const Icon(Icons.arrow_forward_ios_rounded),
     );
   }

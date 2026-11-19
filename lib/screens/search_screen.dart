@@ -1,8 +1,6 @@
-import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:fiziocare/consts/app_colors.dart';
 import 'package:fiziocare/services/assets_manager.dart';
-import 'package:fiziocare/widgets/products/product_widget.dart'; // Možeš kasnije preimenovati i u fizio_widget ili slično, ali za sad ostaje ista struktura
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -13,6 +11,16 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   late TextEditingController searchTextController;
+
+  final List<String> tretmani = [
+    "Tretman #1",
+    "Tretman #2",
+    "Tretman #3",
+    "Tretman #4",
+    "Tretman #5",
+    "Tretman #6",
+  ];
+
   @override
   void initState() {
     searchTextController = TextEditingController();
@@ -33,22 +41,20 @@ class _SearchScreenState extends State<SearchScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
-            leading: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Image.asset("${AssetsManager.imagePath}/logo.png"),
-            ),
-            title: const Text("FizioCare - Pretraga")),
+          leading: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset("${AssetsManager.imagePath}/logo.png"),
+          ),
+          title: const Text("FizioCare"),
+        ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              const SizedBox(
-                height: 15.0,
-              ),
+              const SizedBox(height: 15.0),
               TextField(
                 controller: searchTextController,
                 decoration: InputDecoration(
-                  hintText: "Pretraži vježbe ili usluge...",
                   prefixIcon: const Icon(Icons.search),
                   suffixIcon: GestureDetector(
                     onTap: () {
@@ -61,25 +67,49 @@ class _SearchScreenState extends State<SearchScreen> {
                     ),
                   ),
                 ),
-                onChanged: (value) {
-                  // log("value of the text is $value");
-                },
-                onSubmitted: (value) {
-                  // log("value of the text is $value");
-                },
+                onChanged: (value) {},
+                onSubmitted: (value) {},
               ),
-              const SizedBox(
-                height: 15.0,
-              ),
+              const SizedBox(height: 15.0),
               Expanded(
-                child: DynamicHeightGridView(
+                child: GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
                     mainAxisSpacing: 12,
                     crossAxisSpacing: 12,
-                    builder: (context, index) {
-                      return const ProductWidget();
-                    },
-                    itemCount: 10, // Možeš prilagoditi broj stavki po želji
-                    crossAxisCount: 2),
+                    childAspectRatio: 0.85,
+                  ),
+                  itemCount: tretmani.length,
+                  itemBuilder: (context, index) {
+                    final imagePath =
+                        "${AssetsManager.imagePath}/tretman${index + 1}.png";
+
+                    return Card(
+                      clipBehavior: Clip.antiAlias,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Image.asset(
+                                imagePath,
+                                fit: BoxFit.contain,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 10.0),
+                            child: Text(
+                              tretmani[index],
+                              style: const TextStyle(fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
               ),
             ],
           ),
